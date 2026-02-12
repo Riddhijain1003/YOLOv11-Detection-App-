@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Detection Result</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #eef2f3;
+      text-align: center;
+      padding: 40px;
+    }
+    img, video {
+      margin-top: 20px;
+      max-width: 90%;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    a {
+      display: inline-block;
+      margin-top: 20px;
+      background: #007BFF;
+      color: white;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+    }
+    a:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <h1>Detection Result 🎯</h1>
+
+  {% if file_ext in ['jpg', 'jpeg', 'png'] %}
+    <img src="{{ url_for('static', filename='results/' + filename) }}" alt="Detected Image">
+  {% elif file_ext in ['mp4', 'avi', 'mov'] %}
+    <video controls>
+      <source src="{{ url_for('static', filename='results/' + filename) }}" type="video/{{ file_ext }}">
+      Your browser does not support video playback.
+    </video>
+  {% else %}
+    <p>Unsupported file type.</p>
+  {% endif %}
+
+  <br><a href="{{ url_for('upload_page') }}">⬅ Upload Another</a>
+</body>
+</html>
